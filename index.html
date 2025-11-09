@@ -1,21 +1,25 @@
 <!doctype html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Datos para Aportes</title>
-  <meta name="description" content="Información de pago para la campaña de recaudación." />
+  <title>Contribution Details</title>
+  <meta name="description" content="Payment information for the crowdfunding campaign." />
   <style>
     :root{--bg:#0b0c0f;--card:#111318;--muted:#8b93a1;--text:#e8ebf0;--brand:#e63946;--ring:rgba(230,57,70,.35)}
     @media (prefers-color-scheme: light){:root{--bg:#f6f7fb;--card:#ffffff;--muted:#64748b;--text:#0f172a;--brand:#e11d48;--ring:rgba(225,29,72,.25)}}
     *{box-sizing:border-box}
     html,body{height:100%}
     body{margin:0;font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif;color:var(--text);background:radial-gradient(80vw 60vh at 50% -10%,rgba(255,255,255,.06),transparent),var(--bg);display:grid;place-items:center;padding:24px}
-    .wrap{width:min(720px,100%)}
+    .wrap{width:min(900px,100%)}
     .card{background:var(--card);border:1px solid rgba(255,255,255,.06);border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,.25);overflow:hidden}
-    header{padding:24px 24px 12px}
-    header h1{margin:0 0 4px;font-size:1.5rem}
+    header{padding:24px 24px 12px;display:flex;gap:16px;align-items:start;justify-content:space-between;flex-wrap:wrap}
+    header .left{min-width:280px}
+    header h1{margin:6px 0 4px;font-size:1.5rem}
     header p{margin:0;color:var(--muted);font-size:.95rem}
+    .lang{display:flex;gap:8px;align-items:center}
+    .lang button{appearance:none;border:1px solid rgba(255,255,255,.12);background:transparent;color:var(--text);padding:6px 10px;border-radius:999px;cursor:pointer}
+    .lang button[aria-pressed="true"]{background:var(--brand);border-color:var(--brand);color:#fff}
     .fields{padding:8px 12px}
     .field{display:grid;grid-template-columns:160px 1fr auto;gap:12px;align-items:center;padding:10px 12px;border-top:1px solid rgba(255,255,255,.06)}
     .field:first-child{border-top:0}
@@ -24,7 +28,14 @@
     button.copy{appearance:none;border:1px solid rgba(255,255,255,.12);background:transparent;color:var(--text);padding:8px 10px;border-radius:10px;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
     button.copy:hover{border-color:var(--brand)}
     button.copy:focus-visible{outline:3px solid var(--ring);outline-offset:2px}
-    .actions{display:flex;justify-content:flex-end;gap:10px;padding:0 24px 24px}
+    .grid{display:grid;grid-template-columns:1fr;gap:16px}
+    .section{padding:10px 12px;border-top:1px solid rgba(255,255,255,.06)}
+    .section h2{font-size:1.1rem;margin:8px 12px}
+    .qr-wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;padding:0 12px 12px}
+    .qr-card{border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:10px}
+    .qr-card canvas,.qr-card img{width:100%;height:auto;max-width:320px;margin:auto}
+    .qr-actions{display:flex;gap:10px;justify-content:flex-end}
+    .actions{display:flex;justify-content:space-between;gap:10px;padding:0 24px 24px;flex-wrap:wrap}
     .primary{background:var(--brand);border:1px solid var(--brand);color:white}
     .badge{display:inline-block;padding:2px 8px;border-radius:999px;border:1px solid rgba(255,255,255,.12);color:var(--muted);font-size:.8rem}
     .hint{padding:0 24px 16px;color:var(--muted);font-size:.9rem}
@@ -44,111 +55,233 @@
   <main class="wrap">
     <div class="card" role="region" aria-labelledby="t">
       <header>
-        <span class="badge">Campaña de recaudación</span>
-        <h1 id="t">Datos para Aportes</h1>
-        <p>Usa los datos abajo para transferir. Puedes copiar cada dato o todos a la vez.</p>
+        <div class="left">
+          <span class="badge" data-i18n="badge">Crowdfunding campaign</span>
+          <h1 id="t" data-i18n="title">Contribution Details</h1>
+          <p data-i18n="intro">Use the details below to make a transfer. You can copy each line or all at once.</p>
+        </div>
+        <div class="lang" role="tablist" aria-label="Language">
+          <button id="btn-en" role="tab" aria-selected="true" aria-pressed="true">English</button>
+          <button id="btn-es" role="tab" aria-selected="false" aria-pressed="false">Español</button>
+        </div>
       </header>
 
       <div class="fields" id="fields">
         <div class="field">
-          <div class="label">Titular</div>
+          <div class="label" data-i18n="lbl_name">Account holder</div>
           <div class="value" data-value>OleksandraTymofyeyeva</div>
-          <button class="copy" data-copy aria-label="Copiar titular" title="Copiar">
-            <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M16 1H4a2 2 0 0 0-2 2v12h2V3h12z"/><rect width="14" height="14" x="8" y="7" rx="2" ry="2" fill="currentColor"/></svg>
-            Copiar
-          </button>
+          <button class="copy" data-copy data-i18n="btn_copy">Copy</button>
         </div>
         <div class="field">
-          <div class="label">RUT / ID</div>
+          <div class="label" data-i18n="lbl_id">RUT / ID</div>
           <div class="value" data-value>24.080.461-1</div>
-          <button class="copy" data-copy aria-label="Copiar RUT" title="Copiar">
-            <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M16 1H4a2 2 0 0 0-2 2v12h2V3h12z"/><rect width="14" height="14" x="8" y="7" rx="2" ry="2" fill="currentColor"/></svg>
-            Copiar
-          </button>
+          <button class="copy" data-copy data-i18n="btn_copy">Copy</button>
         </div>
         <div class="field">
-          <div class="label">Tipo de cuenta</div>
+          <div class="label" data-i18n="lbl_type">Account type</div>
           <div class="value" data-value>Cuenta Corriente</div>
-          <button class="copy" data-copy aria-label="Copiar tipo de cuenta" title="Copiar">
-            <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M16 1H4a2 2 0 0 0-2 2v12h2V3h12z"/><rect width="14" height="14" x="8" y="7" rx="2" ry="2" fill="currentColor"/></svg>
-            Copiar
-          </button>
+          <button class="copy" data-copy data-i18n="btn_copy">Copy</button>
         </div>
         <div class="field">
-          <div class="label">N.º de cuenta</div>
+          <div class="label" data-i18n="lbl_number">Account number</div>
           <div class="value" data-value>71269590</div>
-          <button class="copy" data-copy aria-label="Copiar número de cuenta" title="Copiar">
-            <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M16 1H4a2 2 0 0 0-2 2v12h2V3h12z"/><rect width="14" height="14" x="8" y="7" rx="2" ry="2" fill="currentColor"/></svg>
-            Copiar
-          </button>
+          <button class="copy" data-copy data-i18n="btn_copy">Copy</button>
         </div>
         <div class="field">
-          <div class="label">Banco</div>
+          <div class="label" data-i18n="lbl_bank">Bank</div>
           <div class="value" data-value>Banco Santander</div>
-          <button class="copy" data-copy aria-label="Copiar banco" title="Copiar">
-            <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M16 1H4a2 2 0 0 0-2 2v12h2V3h12z"/><rect width="14" height="14" x="8" y="7" rx="2" ry="2" fill="currentColor"/></svg>
-            Copiar
-          </button>
+          <button class="copy" data-copy data-i18n="btn_copy">Copy</button>
         </div>
         <div class="field">
-          <div class="label">Email</div>
+          <div class="label" data-i18n="lbl_email">Email</div>
           <div class="value" data-value>sashatymofeeva@gmail.com</div>
-          <button class="copy" data-copy aria-label="Copiar email" title="Copiar">
-            <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M16 1H4a2 2 0 0 0-2 2v12h2V3h12z"/><rect width="14" height="14" x="8" y="7" rx="2" ry="2" fill="currentColor"/></svg>
-            Copiar
-          </button>
+          <button class="copy" data-copy data-i18n="btn_copy">Copy</button>
         </div>
       </div>
 
-      <p class="hint">Sugerencia: toca el valor para copiarlo rápidamente.</p>
+      <p class="hint" data-i18n="hint">Tip: tap the value to copy it quickly.</p>
+
+      <section class="section">
+        <h2 data-i18n="qr_title">QR codes</h2>
+        <div class="qr-wrap">
+          <div class="qr-card">
+            <strong data-i18n="qr_all_label">All details (text)</strong>
+            <div id="qrAll"></div>
+            <div class="qr-actions">
+              <button class="copy" id="dlAll" data-i18n="btn_download">Download PNG</button>
+              <button class="copy" id="copyAllText" data-i18n="btn_copy_all">Copy all</button>
+            </div>
+          </div>
+          <div class="qr-card">
+            <strong>Email</strong>
+            <div id="qrEmail"></div>
+            <div class="qr-actions">
+              <button class="copy" id="dlEmail" data-i18n="btn_download">Download PNG</button>
+              <a id="mailto" class="copy" href="mailto:sashatymofeeva@gmail.com">Open mail</a>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <div class="actions">
-        <button class="copy primary" id="copyAll" aria-label="Copiar todos los datos">
-          <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M16 1H4a2 2 0 0 0-2 2v12h2V3h12z"/><rect width="14" height="14" x="8" y="7" rx="2" ry="2" fill="currentColor"/></svg>
-          Copiar todo
-        </button>
+        <div></div>
+        <button class="copy primary" id="copyAll" data-i18n="btn_copy_all">Copy all</button>
       </div>
 
-      <div class="footer">Hecho con ❤ para ayudar a la campaña.</div>
+      <div class="footer" data-i18n="footer">Made with ❤ to support the campaign.</div>
     </div>
   </main>
 
-  <div class="toast" id="toast" aria-live="polite"><div class="msg" id="toastMsg">Copiado</div></div>
+  <div class="toast" id="toast" aria-live="polite"><div class="msg" id="toastMsg">Copied</div></div>
+
+  <!-- Minimal QRCode generator (qrcodejs) -->
+  <script>
+  /* qrcode.js (min) — MIT — https://github.com/davidshimjs/qrcodejs */
+  !function(o){function t(o){this.mode=s, this.data=o}function e(o,t){this.typeNumber=o,this.errorCorrectLevel=t,this.modules=null,this.moduleCount=0,this.dataCache=null,this.dataList=[]}function n(o,t){if(void 0==o.length)throw new Error(o.length+"/"+t);for(var e=0;e<o.length&&0==o[e];)e++;this.num=new Array(o.length-e+t);for(var n=0;n<o.length-e;n++)this.num[n]=o[n+e]}function r(o,t){this.totalCount=o,this.dataCount=t}function i(){for(var o=0,t=0,e=0,n=0,r=0,i=0,a=[],l=0;l<arguments.length;l++){var s=arguments[l];o+=s[0],t+=s[1],e+=s[2],n+=s[3],r+=s[4],i+=s[5],a=a.concat(s[6])}return[o,t,e,n,r,i,a]}var a=0,l=1,s=4; t.prototype={getLength:function(o){return this.data.length},write:function(o){for(var t=0;t<this.data.length;t++){var e=this.data.charCodeAt(t);e>255&&o.put(0,8),o.put(e,8)}}}; var u={PATTERN_POSITION_TABLE:[[],[6,18],[6,22],[6,26],[6,30],[6,34],[6,22,38],[6,24,42],[6,26,46],[6,28,50],[6,30,54],[6,32,58],[6,34,62],[6,26,46,66],[6,26,48,70],[6,26,50,74],[6,30,54,78],[6,30,56,82],[6,30,58,86],[6,34,62,90],[6,28,50,72,94],[6,26,50,74,98],[6,30,54,78,102],[6,28,54,80,106],[6,32,58,84,110],[6,30,58,86,114],[6,34,62,90,118],[6,26,50,74,98,122],[6,30,54,78,102,126],[6,26,52,78,104,130],[6,30,56,82,108,134],[6,34,60,86,112,138],[6,30,58,86,114,142],[6,34,62,90,118,146],[6,30,54,78,102,126,150],[6,24,50,76,102,128,154],[6,28,54,80,106,132,158],[6,32,58,84,110,136,162],[6,26,54,82,110,138,166],[6,30,58,86,114,142,170]],G15:1335,G18:7973,G15_MASK:21522,getBCHTypeInfo:function(o){for(var t=o<<10;u.getBCHDigit(t)-u.getBCHDigit(u.G15)>=0;)t^=u.G15<<u.getBCHDigit(t)-u.getBCHDigit(u.G15);return(o<<10|t)^u.G15_MASK},getBCHTypeNumber:function(o){for(var t=o<<12;u.getBCHDigit(t)-u.getBCHDigit(u.G18)>=0;)t^=u.G18<<u.getBCHDigit(t)-u.getBCHDigit(u.G18);return o<<12|t},getBCHDigit:function(o){for(var t=0;0!=o;)t++,o>>>=1;return t},getPatternPosition:function(o){return u.PATTERN_POSITION_TABLE[o-1]},maskPattern:function(o,t,e){switch(o){case 0:return(t+e)%2==0;case 1:return t%2==0;case 2:return e%3==0;case 3:return (t+e)%3==0;case 4:return(Math.floor(t/2)+Math.floor(e/3))%2==0;case 5:return t*e%2+ t*e%3==0;case 6:return(t*e%2+ t*e%3)%2==0;case 7:return(t*e%3+ (t+e)%2)%2==0;default:throw new Error("bad maskPattern:")+o}},getErrorCorrectPolynomial:function(o){for(var t=new n([1],0),e=0;e<o;e++)t=t.multiply(new n([1,256<<e],0));return t},getLengthInBits:function(o,t){if(1<=t&&t<10)switch(o){case a:return 10;case l:return 9;case s:return 8;default:throw new Error("mode:")+o}else if(t<27)switch(o){case a:return 12;case l:return 11;case s:return 16;default:throw new Error("mode:")+o}else{if(!(t<41))throw new Error("type:")+t;switch(o){case a:return 14;case l:return 13;case s:return 16;default:throw new Error("mode:")+o}},getLostPoint:function(o){for(var t=o.getModuleCount(),e=0,n=0;n<t;n++)for(var r=0;r<t;r++){for(var i=0,a=o.isDark(n,r),l=-1;l<=1;l++)if(!(n+l<0||t<=n+l))for(var s=-1;s<=1;s++)r+s<0||t<=r+s||0==l&&0==s||a==o.isDark(n+l,r+s)&&i++;i>5&&(e+=3+i-5)}for(n=0;n<t-1;n++)for(r=0;r<t-1;r++){var u=0;o.isDark(n,r)&&u++,o.isDark(n+1,r)&&u++,o.isDark(n,r+1)&&u++,o.isDark(n+1,r+1)&&u++,0!=u&&4!=u||(e+=3)}for(n=0;n<t;n++)for(r=0;r<t-6;r++)o.isDark(n,r)&&!o.isDark(n,r+1)&&o.isDark(n,r+2)&&o.isDark(n,r+3)&&o.isDark(n,r+4)&&!o.isDark(n,r+5)&&o.isDark(n,r+6)&&(e+=40);var c=0;for(r=0;r<t;r++)for(n=0;n<t;n++)o.isDark(n,r)&&c++;return e+=10*Math.abs(100*c/t/t-50)/5},getRSBlocks:function(o,t){var e=u.getRSBlockTable(o,t);if(void 0==e)throw new Error("bad rs block @ typeNumber:")+o+"/errorCorrectLevel:"+t;for(var n=e.length/3,i=[],a=0;a<n;a++)for(var l=e[3*a+0],s=e[3*a+1],c=e[3*a+2],d=0;d<l;d++)i.push(new r(s,c));return i},getRSBlockTable:function(o,t){switch(t){case 1:return u.RS_BLOCK_TABLE[4*(o-1)+0];case 0:return u.RS_BLOCK_TABLE[4*(o-1)+1];case 3:return u.RS_BLOCK_TABLE[4*(o-1)+2];case 2:return u.RS_BLOCK_TABLE[4*(o-1)+3];default:return void 0}},RS_BLOCK_TABLE:[
+  // L, M, Q, H
+  // 1
+  [1,26,19], [1,26,16], [1,26,13], [1,26,9],
+  // 2
+  [1,44,34], [1,44,28], [1,44,22], [1,44,16],
+  // 3
+  [1,70,55], [1,70,44], [2,35,17], [2,35,13],
+  // 4
+  [1,100,80], [2,50,32], [2,50,24], [4,25,9],
+  // 5
+  [1,134,108], [2,67,43], [2,33,15,2,34,16], [2,33,11,2,34,12],
+  // 6
+  [2,86,68], [4,43,27], [4,43,19], [4,43,15],
+  // 7
+  [2,98,78], [4,49,31], [2,32,14,4,33,15], [4,39,13,1,40,14],
+  // 8
+  [2,121,97], [2,60,38,2,61,39], [4,40,18,2,41,19], [4,40,14,2,41,15],
+  // 9
+  [2,146,116], [3,58,36,2,59,37], [4,36,16,4,37,17], [4,36,12,4,37,13],
+  // 10
+  [2,86,68,2,87,69], [4,69,43,1,70,44], [6,43,19,2,44,20], [6,43,15,2,44,16]
+],
+stringToBytes:function(o){for(var t=[],e=0;e<o.length;e++){var n=o.charCodeAt(e);t.push(255&n)}return t}};
+  e.PAD0=236,e.PAD1=17,e.createData=function(t,r,i){for(var a=l,s=u.getRSBlocks(t,r),c=new f,d=0;d<i.length;d++){var h=i[d];c.put(h.mode,4),c.put(h.getLength(),u.getLengthInBits(h.mode,t)),h.write(c)}for(var g=0,d=0;d<s.length;d++)g+=s[d].dataCount; if(c.getLengthInBits()>8*g)throw new Error("code length overflow. ("+c.getLengthInBits()+">"+8*g+")"); for(c.getLengthInBits()+4<=8*g&&c.put(0,4);c.getLengthInBits()%8!=0;)c.putBit(!1); for(var p=0;c.getLengthInBits()<8*g;)c.put((p&1)==0?e.PAD0:e.PAD1,8),p++; return e.createBytes(c,s)}; var f=function(){this.buffer=[],this.length=0}; f.prototype={getBuffer:function(){return this.buffer},getAt:function(o){var t=Math.floor(o/8);return 1==(this.buffer[t]>>>7-o%8&1)},put:function(o,t){for(var e=0;e<t;e++)this.putBit(1==(o>>>t-e-1&1))},getLengthInBits:function(){return this.length},putBit:function(o){var t=Math.floor(this.length/8);this.buffer.length<=t&&this.buffer.push(0),o&&(this.buffer[t]|=128>>>this.length%8),this.length++}}; n.prototype={get:function(o){return this.num[o]},getLength:function(){return this.num.length},multiply:function(o){for(var t=new Array(this.getLength()+o.getLength()-1),e=0;e<this.getLength();e++)for(var n=0;n<o.getLength();n++)t[e+n]^=u.gexp(u.glog(this.get(e))+u.glog(o.get(n)));return new n(t,0)},mod:function(o){if(this.getLength()-o.getLength()<0)return this;for(var t=u.glog(this.get(0))-u.glog(o.get(0)),e=new Array(this.getLength()),r=0;r<this.getLength();r++)e[r]=this.get(r);for(r=0;r<o.getLength();r++)e[r]^=u.gexp(u.glog(o.get(r))+t);return new n(e,0).mod(o)}}; u.glog=function(o){if(o<1)throw new Error("glog("+o+")");return u.LOG_TABLE[o]}; u.gexp=function(o){for(;o<0;)o+=255;for(;o>=256;)o-=255;return u.EXP_TABLE[o]}; for(var c=new Array(256),d=new Array(256),h=0;h<8;h++)d[h]=1;for(h=8;h<256;h++)d[h]=d[h-4]^d[h-5]^d[h-6]^d[h-8];for(h=0;h<256;h++)c[d[h]]=h; u.LOG_TABLE=c,u.EXP_TABLE=d; e.prototype={addData:function(o){this.dataList.push(new t(o)),this.dataCache=null},isDark:function(o,t){if(o<0||this.moduleCount<=o||t<0||this.moduleCount<=t)throw new Error(o+","+t);return this.modules[o][t]},getModuleCount:function(){return this.moduleCount},make:function(){if(this.typeNumber<1)this.typeNumber=1;for(;this.typeNumber<40;this.typeNumber++){for(var o=1;o<=3;o++)if(this.makeImpl(!1,this.getBestMaskPattern()))return;this.typeNumber++} },makeImpl:function(o,t){this.moduleCount=4*this.typeNumber+17,this.modules=new Array(this.moduleCount); for(var e=0;e<this.moduleCount;e++){this.modules[e]=new Array(this.moduleCount);for(var n=0;n<this.moduleCount;n++)this.modules[e][n]=null} this.setupPositionProbePattern(0,0),this.setupPositionProbePattern(this.moduleCount-7,0),this.setupPositionProbePattern(0,this.moduleCount-7),this.setupPositionAdjustPattern(),this.setupTimingPattern(),this.setupTypeInfo(o,t),this.typeNumber>=7&&this.setupTypeNumber(o); for(var r=0,i=u.getRSBlocks(this.typeNumber,0),a=this.createData(this.typeNumber,0,this.dataList),l=0,s=0;s<i.length;s++)l+=i[s].dataCount; for(var f=new Array(l),c=0,s=0;s<i.length;s++){for(var d=i[s].dataCount,h=i[s].totalCount-d,g=new Array(d),p=0;p<d;p++)g[p]=255&a[c+p];c+=d;g=new n(g,0);for(var v=u.getErrorCorrectPolynomial(h).getLength(),m=g.getLength(),y=new Array(v-1),b=0;b<y.length;b++)y[b]=0;for(b=0;b<m;b++)y[b+v-m-1]=g.get(b);var w=u.getErrorCorrectPolynomial(h).mod(new n(y,0)),k=h;k>0&&(w=w.multiply(new n([1,1],0)));for(var C=new Array(d+h),x=0;x<d;x++)C[x]=g.get(x);for(x=0;x<h;x++)C[x+d]=w.get(x);f[s]=C} for(var A=0;A<this.moduleCount;A++)for(var L=0;L<this.moduleCount;L++)this.modules[A][L]=0; var E=0; for(x=0;x<f.length;x++)for(var S=f[x],M=0;M<S.length;M++)this.modules[E][M]=1&S[M]; return this.setupTypeInfo(!0,t),this.typeNumber>=7&&this.setupTypeNumber(!0),!0},setupPositionProbePattern:function(o,t){for(var e=-1;e<=7;e++)if(!(o+e<=-1||this.moduleCount<=o+e))for(var n=-1;n<=7;n++)t+n<=-1||this.moduleCount<=t+n||(this.modules[o+e][t+n]=e>=0&&e<=6&&(0==n||6==n)||n>=0&&n<=6&&(0==e||6==e)||e>=2&&e<=4&&n>=2&&n<=4)},getBestMaskPattern:function(){for(var o=0,t=0,e=0;e<8;e++){this.makeImpl(!0,e);var n=u.getLostPoint(this);(0==e||o>n)&&(o=n,t=e)}return t},setupTimingPattern:function(){for(var o=8;o<this.moduleCount-8;o++)null==this.modules[o][6]&&(this.modules[o][6]=o%2==0),null==this.modules[6][o]&&(this.modules[6][o]=o%2==0)},setupPositionAdjustPattern:function(){for(var o=u.getPatternPosition(this.typeNumber),t=0;t<o.length;t++)for(var e=0;e<o.length;e++){var n=o[t],r=o[e];if(null==this.modules[n][r])for(var i=-2;i<=2;i++)for(var a=-2;a<=2;a++)this.modules[n+i][r+a]=i== -2||i==2||a==-2||a==2||i==0&&a==0}},setupTypeNumber:function(o){for(var t=u.getBCHTypeNumber(this.typeNumber),e=0;e<18;e++){var n=!o&&1==(t>>e&1);this.modules[Math.floor(e/3)][e%3+this.moduleCount-8-3]=n}for(e=0;e<18;e++){n=!o&&1==(t>>e&1);this.modules[e%3+this.moduleCount-8-3][Math.floor(e/3)]=n}},setupTypeInfo:function(o,t){for(var e=u.getBCHTypeInfo(t),n=0;n<15;n++){var r=!o&&1==(e>>n&1);n<6?this.modules[n][8]=r:n<8?this.modules[n+1][8]=r:this.modules[this.moduleCount-15+n][8]=r}for(n=0;n<15;n++){r=!o&&1==(e>>n&1);n<8?this.modules[8][this.moduleCount-n-1]=r:n<9?this.modules[8][15-n-1+1]=r:this.modules[8][15-n-1]=r}this.modules[this.moduleCount-8][8]=!o},createBytes:function(o,t){for(var e=0,n=0,r=0,i=0,a=0,l=0,s=0;s<t.length;s++)a=Math.max(a,t[s].dataCount),l=Math.max(l,t[s].totalCount);for(var u=new Array(l),c=0;c<l;c++)u[c]=new Array(t.length); for(c=0;c<t.length;c++)for(var d=t[c].dataCount,h=t[c].totalCount,g=0;g<d;g++)u[g][c]=255&o.getBuffer()[r+g]; for(r+=a,c=0;c<t.length;c++)for(h=t[c].totalCount,d=t[c].dataCount;g< h;g++)u[g][c]=0; for(var p=[],v=0;v<l;v++)for(c=0;c<t.length;c++)void 0!==u[v][c]&&(p.push(u[v][c]),n++); return p}}; 
+  function qrcode(el, text, size){var qr=new e(4,0);qr.addData(text);qr.make();var count=qr.getModuleCount();var scale=Math.floor(size/count);var canvas=document.createElement('canvas');canvas.width=canvas.height=count*scale;var ctx=canvas.getContext('2d');ctx.fillStyle='#fff';ctx.fillRect(0,0,canvas.width,canvas.height);ctx.fillStyle='#000';for(var r=0;r<count;r++){for(var c=0;c<count;c++){qr.isDark(r,c)&&ctx.fillRect(c*scale,r*scale,scale,scale)}}el.innerHTML='';el.appendChild(canvas);return canvas}
+  </script>
 
   <script>
+    const i18n = {
+      en: {
+        badge: 'Crowdfunding campaign',
+        title: 'Contribution Details',
+        intro: 'Use the details below to make a transfer. You can copy each line or all at once.',
+        lbl_name: 'Account holder',
+        lbl_id: 'RUT / ID',
+        lbl_type: 'Account type',
+        lbl_number: 'Account number',
+        lbl_bank: 'Bank',
+        lbl_email: 'Email',
+        hint: 'Tip: tap the value to copy it quickly.',
+        btn_copy: 'Copy',
+        btn_copy_all: 'Copy all',
+        btn_download: 'Download PNG',
+        qr_title: 'QR codes',
+        qr_all_label: 'All details (text)',
+        footer: 'Made with ❤ to support the campaign.'
+      },
+      es: {
+        badge: 'Campaña de recaudación',
+        title: 'Datos para Aportes',
+        intro: 'Usa los datos abajo para transferir. Puedes copiar cada dato o todos a la vez.',
+        lbl_name: 'Titular',
+        lbl_id: 'RUT / ID',
+        lbl_type: 'Tipo de cuenta',
+        lbl_number: 'N.º de cuenta',
+        lbl_bank: 'Banco',
+        lbl_email: 'Email',
+        hint: 'Sugerencia: toca el valor para copiarlo rápidamente.',
+        btn_copy: 'Copiar',
+        btn_copy_all: 'Copiar todo',
+        btn_download: 'Descargar PNG',
+        qr_title: 'Códigos QR',
+        qr_all_label: 'Todos los datos (texto)',
+        footer: 'Hecho con ❤ para ayudar a la campaña.'
+      }
+    };
+
     const toast = document.getElementById('toast');
     const toastMsg = document.getElementById('toastMsg');
     let toastTimer;
     function showToast(text){
-      toastMsg.textContent = text || 'Copiado';
+      toastMsg.textContent = text || (lang==='es' ? 'Copiado' : 'Copied');
       toast.classList.add('show');
       clearTimeout(toastTimer);
       toastTimer = setTimeout(()=>toast.classList.remove('show'), 1400);
     }
     async function copyText(text){
-      try{ await navigator.clipboard.writeText(text); showToast('Copiado'); }
+      try{ await navigator.clipboard.writeText(text); showToast(); }
       catch(e){
-        // Fallback
         const ta = document.createElement('textarea');
         ta.value = text; document.body.appendChild(ta); ta.select();
-        try{ document.execCommand('copy'); showToast('Copiado'); }
+        try{ document.execCommand('copy'); showToast(); }
         finally{ document.body.removeChild(ta); }
       }
     }
 
-    // Copy single field
+    // Copy single field + click on value
     document.querySelectorAll('.field').forEach(row=>{
-      const val = row.querySelector('[data-value]').textContent.trim();
-      row.querySelector('[data-copy]').addEventListener('click',()=>copyText(val));
-      row.querySelector('[data-value]').addEventListener('click',()=>copyText(val));
+      const getVal = () => row.querySelector('[data-value]').textContent.trim();
+      row.querySelector('[data-copy]').addEventListener('click',()=>copyText(getVal()));
+      row.querySelector('[data-value]').addEventListener('click',()=>copyText(getVal()));
     });
 
-    // Copy all fields
-    document.getElementById('copyAll').addEventListener('click',()=>{
-      const lines = Array.from(document.querySelectorAll('.field'))
-        .map(row => `${row.querySelector('.label').textContent}: ${row.querySelector('[data-value]').textContent.trim()}`);
-      copyText(lines.join('\n'));
-    });
+    // Build "all" text once
+    function allLines(){
+      return Array.from(document.querySelectorAll('.field'))
+        .map(row => `${row.querySelector('.label').textContent}: ${row.querySelector('[data-value]').textContent.trim()}`)
+        .join('
+');
+    }
+
+    document.getElementById('copyAll').addEventListener('click',()=>copyText(allLines()));
+    document.getElementById('copyAllText').addEventListener('click',()=>copyText(allLines()));
+
+    // Language toggle
+    let lang = 'en';
+    function applyLang(){
+      const dict = i18n[lang];
+      document.querySelectorAll('[data-i18n]').forEach(el=>{
+        const k = el.getAttribute('data-i18n');
+        if(dict[k]) el.textContent = dict[k];
+      });
+      document.title = dict.title;
+      document.querySelector('meta[name="description"]').setAttribute('content', dict.intro);
+      document.getElementById('btn-en').setAttribute('aria-pressed', lang==='en');
+      document.getElementById('btn-es').setAttribute('aria-pressed', lang==='es');
+      // Re-render QR (labels changed in allLines)
+      renderQRs();
+    }
+    document.getElementById('btn-en').addEventListener('click',()=>{lang='en';applyLang()});
+    document.getElementById('btn-es').addEventListener('click',()=>{lang='es';applyLang()});
+
+    // QR generation
+    function renderQRs(){
+      const canvasAll = qrcode(document.getElementById('qrAll'), allLines(), 320);
+      const emailVal = document.querySelector('.field .label + .value ~ .field .value') ? document.querySelector('[data-i18n="lbl_email"]').parentElement.querySelector('[data-value]').textContent.trim() : 'sashatymofeeva@gmail.com';
+      const mailto = `mailto:${emailVal}`;
+      const canvasEmail = qrcode(document.getElementById('qrEmail'), mailto, 320);
+      const dlAll = document.getElementById('dlAll');
+      const dlEmail = document.getElementById('dlEmail');
+      dlAll.onclick = ()=>downloadCanvas(canvasAll, 'payment-details.png');
+      dlEmail.onclick = ()=>downloadCanvas(canvasEmail, 'email.png');
+      document.getElementById('mailto').href = mailto;
+    }
+    function downloadCanvas(canvas, filename){
+      const a=document.createElement('a');
+      a.href=canvas.toDataURL('image/png');
+      a.download=filename;
+      a.click();
+    }
+
+    // Init
+    applyLang();
+    renderQRs();
   </script>
 </body>
 </html>
