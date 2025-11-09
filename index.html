@@ -24,7 +24,7 @@
     button.copy{appearance:none;border:1px solid rgba(255,255,255,.12);background:transparent;color:var(--text);padding:8px 10px;border-radius:10px;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
     button.copy:hover{border-color:var(--brand)}
     button.copy:focus-visible{outline:3px solid var(--ring);outline-offset:2px}
-    .actions{display:flex;justify-content:flex-end;gap:10px;padding:0 24px 24px}
+    .actions{display:flex;justify-content:flex-end;gap:10px;padding:24px 24px 0}
     .primary{background:var(--brand);border:1px solid var(--brand);color:white}
     .badge{display:inline-block;padding:2px 8px;border-radius:999px;border:1px solid rgba(255,255,255,.12);color:var(--muted);font-size:.8rem}
     .hint{padding:0 24px 16px;color:var(--muted);font-size:.9rem}
@@ -48,6 +48,13 @@
         <h1 id="t">Datos para Aportes</h1>
         <p>Usa los datos abajo para transferir. Puedes copiar cada dato o todos a la vez.</p>
       </header>
+
+      <div class="actions">
+        <button class="copy primary" id="copyAll" aria-label="Copiar todos los datos">
+          <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M16 1H4a2 2 0 0 0-2 2v12h2V3h12z"/><rect width="14" height="14" x="8" y="7" rx="2" ry="2" fill="currentColor"/></svg>
+          Copiar todo
+        </button>
+      </div>
 
       <div class="fields" id="fields">
         <div class="field">
@@ -102,13 +109,6 @@
 
       <p class="hint">Sugerencia: toca el valor para copiarlo rápidamente.</p>
 
-      <div class="actions">
-        <button class="copy primary" id="copyAll" aria-label="Copiar todos los datos">
-          <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M16 1H4a2 2 0 0 0-2 2v12h2V3h12z"/><rect width="14" height="14" x="8" y="7" rx="2" ry="2" fill="currentColor"/></svg>
-          Copiar todo
-        </button>
-      </div>
-
       <div class="footer">Hecho con ❤ para ayudar a la campaña.</div>
     </div>
   </main>
@@ -128,7 +128,6 @@
     async function copyText(text){
       try{ await navigator.clipboard.writeText(text); showToast('Copiado'); }
       catch(e){
-        // Fallback
         const ta = document.createElement('textarea');
         ta.value = text; document.body.appendChild(ta); ta.select();
         try{ document.execCommand('copy'); showToast('Copiado'); }
@@ -136,14 +135,12 @@
       }
     }
 
-    // Copy single field
     document.querySelectorAll('.field').forEach(row=>{
       const val = row.querySelector('[data-value]').textContent.trim();
       row.querySelector('[data-copy]').addEventListener('click',()=>copyText(val));
       row.querySelector('[data-value]').addEventListener('click',()=>copyText(val));
     });
 
-    // Copy all fields
     document.getElementById('copyAll').addEventListener('click',()=>{
       const lines = Array.from(document.querySelectorAll('.field'))
         .map(row => `${row.querySelector('.label').textContent}: ${row.querySelector('[data-value]').textContent.trim()}`);
