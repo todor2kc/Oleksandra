@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Datos para Aportes</title>
+  <meta name="description" content="Información de pago para la campaña de recaudación." />
+  <style>
+    :root{--bg:#0b0c0f;--card:#111318;--muted:#8b93a1;--text:#e8ebf0;--brand:#e63946;--ring:rgba(230,57,70,.35)}
+    @media (prefers-color-scheme: light){:root{--bg:#f6f7fb;--card:#ffffff;--muted:#64748b;--text:#0f172a;--brand:#e11d48;--ring:rgba(225,29,72,.25)}}
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif;color:var(--text);background:radial-gradient(80vw 60vh at 50% -10%,rgba(255,255,255,.06),transparent),var(--bg);display:grid;place-items:center;padding:24px}
+    .wrap{width:min(720px,100%)}
+    .card{background:var(--card);border:1px solid rgba(255,255,255,.06);border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,.25);overflow:hidden}
+    header{padding:24px 24px 12px}
+    header h1{margin:0 0 4px;font-size:1.5rem}
+    header p{margin:0;color:var(--muted);font-size:.95rem}
+    .fields{padding:8px 12px}
+    .field{display:grid;grid-template-columns:160px 1fr auto;gap:12px;align-items:center;padding:10px 12px;border-top:1px solid rgba(255,255,255,.06)}
+    .field:first-child{border-top:0}
+    .label{color:var(--muted);font-weight:600;letter-spacing:.2px}
+    .value{padding:8px 10px;border:1px solid rgba(255,255,255,.1);border-radius:10px;background:rgba(255,255,255,.03);word-break:break-word}
+    button.copy{appearance:none;border:1px solid rgba(255,255,255,.12);background:transparent;color:var(--text);padding:8px 10px;border-radius:10px;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
+    button.copy:hover{border-color:var(--brand)}
+    button.copy:focus-visible{outline:3px solid var(--ring);outline-offset:2px}
+    .actions{display:flex;justify-content:flex-end;gap:10px;padding:0 24px 24px}
+    .primary{background:var(--brand);border:1px solid var(--brand);color:white}
+    .badge{display:inline-block;padding:2px 8px;border-radius:999px;border:1px solid rgba(255,255,255,.12);color:var(--muted);font-size:.8rem}
+    .hint{padding:0 24px 16px;color:var(--muted);font-size:.9rem}
+    .toast{position:fixed;inset:auto 0 18px 0;display:grid;place-items:center;pointer-events:none}
+    .toast .msg{background:var(--card);border:1px solid rgba(255,255,255,.15);padding:10px 14px;border-radius:10px;box-shadow:0 10px 25px rgba(0,0,0,.25);opacity:0;transform:translateY(10px);transition:opacity .18s ease,transform .18s ease}
+    .toast.show .msg{opacity:1;transform:translateY(0)}
+    .footer{padding:12px 24px 24px;color:var(--muted);font-size:.85rem}
+    @media (max-width:640px){
+      .field{grid-template-columns:1fr auto;grid-template-areas:"label btn" "value value"}
+      .label{grid-area:label}
+      .value{grid-area:value}
+      .field .copy{grid-area:btn}
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="card" role="region" aria-labelledby="t">
+      <header>
+        <span class="badge">Campaña de recaudación</span>
+        <h1 id="t">Datos para Aportes</h1>
+        <p>Usa los datos abajo para transferir. Puedes copiar cada dato o todos a la vez.</p>
+      </header>
+
+      <div class="fields" id="fields">
+        <div class="field">
+          <div class="label">Titular</div>
+          <div class="value" data-value>OleksandraTymofyeyeva</div>
+          <button class="copy" data-copy aria-label="Copiar titular" title="Copiar">
+            <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M16 1H4a2 2 0 0 0-2 2v12h2V3h12z"/><rect width="14" height="14" x="8" y="7" rx="2" ry="2" fill="currentColor"/></svg>
+            Copiar
+          </button>
+        </div>
+        <div class="field">
+          <div class="label">RUT / ID</div>
+          <div class="value" data-value>24.080.461-1</div>
+          <button class="copy" data-copy aria-label="Copiar RUT" title="Copiar">
+            <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M16 1H4a2 2 0 0 0-2 2v12h2V3h12z"/><rect width="14" height="14" x="8" y="7" rx="2" ry="2" fill="currentColor"/></svg>
+            Copiar
+          </button>
+        </div>
+        <div class="field">
+          <div class="label">Tipo de cuenta</div>
+          <div class="value" data-value>Cuenta Corriente</div>
+          <button class="copy" data-copy aria-label="Copiar tipo de cuenta" title="Copiar">
+            <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M16 1H4a2 2 0 0 0-2 2v12h2V3h12z"/><rect width="14" height="14" x="8" y="7" rx="2" ry="2" fill="currentColor"/></svg>
+            Copiar
+          </button>
+        </div>
+        <div class="field">
+          <div class="label">N.º de cuenta</div>
+          <div class="value" data-value>71269590</div>
+          <button class="copy" data-copy aria-label="Copiar número de cuenta" title="Copiar">
+            <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M16 1H4a2 2 0 0 0-2 2v12h2V3h12z"/><rect width="14" height="14" x="8" y="7" rx="2" ry="2" fill="currentColor"/></svg>
+            Copiar
+          </button>
+        </div>
+        <div class="field">
+          <div class="label">Banco</div>
+          <div class="value" data-value>Banco Santander</div>
+          <button class="copy" data-copy aria-label="Copiar banco" title="Copiar">
+            <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M16 1H4a2 2 0 0 0-2 2v12h2V3h12z"/><rect width="14" height="14" x="8" y="7" rx="2" ry="2" fill="currentColor"/></svg>
+            Copiar
+          </button>
+        </div>
+        <div class="field">
+          <div class="label">Email</div>
+          <div class="value" data-value>sashatymofeeva@gmail.com</div>
+          <button class="copy" data-copy aria-label="Copiar email" title="Copiar">
+            <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M16 1H4a2 2 0 0 0-2 2v12h2V3h12z"/><rect width="14" height="14" x="8" y="7" rx="2" ry="2" fill="currentColor"/></svg>
+            Copiar
+          </button>
+        </div>
+      </div>
+
+      <p class="hint">Sugerencia: toca el valor para copiarlo rápidamente.</p>
+
+      <div class="actions">
+        <button class="copy primary" id="copyAll" aria-label="Copiar todos los datos">
+          <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M16 1H4a2 2 0 0 0-2 2v12h2V3h12z"/><rect width="14" height="14" x="8" y="7" rx="2" ry="2" fill="currentColor"/></svg>
+          Copiar todo
+        </button>
+      </div>
+
+      <div class="footer">Hecho con ❤ para ayudar a la campaña.</div>
+    </div>
+  </main>
+
+  <div class="toast" id="toast" aria-live="polite"><div class="msg" id="toastMsg">Copiado</div></div>
+
+  <script>
+    const toast = document.getElementById('toast');
+    const toastMsg = document.getElementById('toastMsg');
+    let toastTimer;
+    function showToast(text){
+      toastMsg.textContent = text || 'Copiado';
+      toast.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(()=>toast.classList.remove('show'), 1400);
+    }
+    async function copyText(text){
+      try{ await navigator.clipboard.writeText(text); showToast('Copiado'); }
+      catch(e){
+        // Fallback
+        const ta = document.createElement('textarea');
+        ta.value = text; document.body.appendChild(ta); ta.select();
+        try{ document.execCommand('copy'); showToast('Copiado'); }
+        finally{ document.body.removeChild(ta); }
+      }
+    }
+
+    // Copy single field
+    document.querySelectorAll('.field').forEach(row=>{
+      const val = row.querySelector('[data-value]').textContent.trim();
+      row.querySelector('[data-copy]').addEventListener('click',()=>copyText(val));
+      row.querySelector('[data-value]').addEventListener('click',()=>copyText(val));
+    });
+
+    // Copy all fields
+    document.getElementById('copyAll').addEventListener('click',()=>{
+      const lines = Array.from(document.querySelectorAll('.field'))
+        .map(row => `${row.querySelector('.label').textContent}: ${row.querySelector('[data-value]').textContent.trim()}`);
+      copyText(lines.join('\n'));
+    });
+  </script>
+</body>
+</html>
